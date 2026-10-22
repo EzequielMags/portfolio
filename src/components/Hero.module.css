@@ -3,7 +3,14 @@
   padding-bottom: clamp(64px, 9vw, 112px);
 }
 
-/* Botão Design / Código */
+/* Botão Design / Código e a dica ao lado */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
 .toggle {
   display: inline-flex;
   gap: 2px;
@@ -34,9 +41,103 @@
   color: var(--select);
 }
 
-/* Vista de design: o nome como uma camada selecionada no Figma */
-.designView {
-  margin-top: 52px;
+/* A dica só faz sentido com mouse e com movimento ligado */
+.hint {
+  display: none;
+  font-size: 14px;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hint {
+    display: block;
+  }
+}
+
+/* Cartão 3D: frente (design) e verso (código) no mesmo lugar */
+.stage {
+  width: fit-content;
+  max-width: 100%;
+  /* Espaço para a etiqueta não cobrir o botão quando o cartão inclina */
+  margin-top: 44px;
+  perspective: 1200px;
+}
+
+.card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --flip: 0deg;
+  display: grid;
+  max-width: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(calc(var(--ry) + var(--flip)));
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.stage[data-mode='code'] .card {
+  --flip: 180deg;
+}
+
+/* Enquanto o mouse se move, a inclinação acompanha mais rápido */
+.exploded .card {
+  transition-duration: 0.25s;
+}
+
+.face {
+  grid-area: 1 / 1;
+  align-self: start;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+/* As camadas da frente têm profundidade própria; sem isso apareceriam espelhadas no verso */
+.front * {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Frente: as camadas e a profundidade de cada uma quando "explodidas" */
+.designFace {
+  position: relative;
+  padding-top: 28px;
+  transform-style: preserve-3d;
+}
+
+/* Profundidades relativas: o nome e a etiqueta somam com a da caixa */
+.exploded {
+  --z-plate: -60px;
+  --z-box: 40px;
+  --z-name: 60px;
+  --z-tag: 90px;
+  --z-measure: 110px;
+}
+
+.plate,
+.selection,
+.nameLayer,
+.tagLayer,
+.measure {
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.4s ease-out;
+}
+
+.plate {
+  position: absolute;
+  inset: 4px -24px -8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  opacity: 0;
+  transform: translateZ(var(--z-plate, 0));
+}
+
+.exploded .plate {
+  opacity: 1;
 }
 
 .selection {
@@ -45,12 +146,19 @@
   max-width: 100%;
   border: 1.5px solid var(--select);
   padding: 6px 18px 2px 14px;
+  transform-style: preserve-3d;
+  transform: translateZ(var(--z-box, 0));
 }
 
-.layerTag {
+.tagLayer {
   position: absolute;
   left: -1.5px;
   top: -27px;
+  transform: translateZ(var(--z-tag, 0));
+}
+
+.layerTag {
+  display: block;
   background: var(--select);
   color: var(--bg);
   font-family: var(--font-mono);
@@ -88,6 +196,10 @@
   right: -5px;
 }
 
+.nameLayer {
+  transform: translateZ(var(--z-name, 0));
+}
+
 .name {
   font-size: clamp(56px, 12.5vw, 172px);
   line-height: 0.86;
@@ -104,6 +216,7 @@
   gap: 8px;
   height: 48px;
   padding-left: 28px;
+  transform: translateZ(var(--z-measure, 0));
 }
 
 .measureLine {
@@ -122,9 +235,8 @@
   padding: 2px 6px;
 }
 
-/* Vista de código */
+/* Verso: vista de código */
 .codeView {
-  margin-top: 24px;
   background: var(--code-bg);
   color: var(--code-text);
   border-radius: 6px;
@@ -150,7 +262,19 @@
   color: var(--code-str);
 }
 
-/* Texto abaixo do nome */
+/* Quem pede menos movimento vê a troca sem giro e sem camadas */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .plate,
+  .selection,
+  .nameLayer,
+  .tagLayer,
+  .measure {
+    transition: none;
+  }
+}
+
+/* Texto abaixo do cartão */
 .role {
   margin-top: 40px;
   font-size: clamp(24px, 3.2vw, 36px);
