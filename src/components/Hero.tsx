@@ -43,7 +43,6 @@ function CodeView() {
     <span className={styles.tag}>&lt;Hero</span>,
     <>  nome={str(fullName)}</>,
     <>  papel={str(profile.role)}</>,
-    <>  busca={str(profile.lookingFor)}</>,
     <>
       {'  stack={['}
       {profile.heroStack.map((item, index) => (
