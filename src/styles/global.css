@@ -49,6 +49,40 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/*
+  Fundo de canvas: grade de pontos fixa, como numa ferramenta de design.
+  A segunda camada acende os pontos em azul ao redor do mouse; a posição
+  vem de --mx/--my, atualizadas em useCanvasSpotlight.
+*/
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-size: 24px 24px;
+  background-position: center top;
+}
+
+body::before {
+  background-image: radial-gradient(circle, rgb(169 176 196 / 0.22) 1px, transparent 1.4px);
+  /* Os pontos somem para as bordas de baixo, para não competir com o conteúdo */
+  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, rgb(0 0 0 / 0.35) 100%);
+}
+
+body::after {
+  background-image: radial-gradient(circle, rgb(127 155 255 / 0.75) 1.2px, transparent 1.6px);
+  mask-image: radial-gradient(
+    200px circle at var(--mx, -999px) var(--my, -999px),
+    #000 0%,
+    rgb(0 0 0 / 0.4) 45%,
+    transparent 100%
+  );
+  opacity: var(--spotlight, 0);
+  transition: opacity 0.3s ease-out;
+}
+
 h1,
 h2,
 h3,
