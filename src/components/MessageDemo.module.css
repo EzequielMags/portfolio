@@ -1,0 +1,86 @@
+.demo {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  padding: clamp(20px, 4vw, 48px);
+  display: flex;
+}
+
+.stack {
+  flex-direction: column;
+  justify-content: center;
+  min-height: 320px;
+}
+
+.row {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 40px;
+  padding: clamp(24px, 5vw, 64px);
+}
+
+.bubble {
+  align-self: flex-start;
+  background: var(--text);
+  color: var(--bg);
+  padding: 12px 18px;
+  border-radius: 18px 18px 18px 4px;
+  font-size: clamp(17px, 2vw, 21px);
+}
+
+.row .bubble {
+  align-self: center;
+  font-size: clamp(18px, 2.4vw, 26px);
+  padding: 14px 22px;
+  border-radius: 20px 20px 20px 4px;
+}
+
+.connector {
+  display: block;
+  background: var(--select);
+}
+
+.stack .connector {
+  width: 1.5px;
+  height: 32px;
+  margin-left: 28px;
+}
+
+.row .connector {
+  flex: 0 0 48px;
+  height: 1.5px;
+}
+
+.json {
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 20px 24px;
+  font-size: clamp(14px, 1.6vw, 17px);
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.row .json {
+  flex: 1 1 300px;
+  min-width: 0;
+  background: var(--code-bg);
+  color: var(--code-text);
+  font-size: clamp(15px, 1.8vw, 19px);
+}
+
+.key {
+  color: var(--select);
+}
+
+.row .key {
+  color: var(--code-key);
+}
+
+.str {
+  color: var(--measure);
+}
+
+.row .str {
+  color: var(--code-str);
+}

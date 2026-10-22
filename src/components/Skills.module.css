@@ -1,0 +1,43 @@
+.skills {
+  background: var(--surface);
+}
+
+.groups {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 48px;
+}
+
+.group {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.groupTitle {
+  margin-bottom: 12px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.items {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.usedIn {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.soft {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.softText {
+  max-width: 60ch;
+}

@@ -1,0 +1,106 @@
+/*
+  Animações do portfólio. Todas ficam dentro de prefers-reduced-motion: no-preference,
+  então quem pede menos movimento no sistema vê tudo parado e completo.
+  O atraso de cada elemento vem de animation-delay no próprio componente.
+*/
+
+@media (prefers-reduced-motion: no-preference) {
+  .a-up {
+    animation: a-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .a-fade {
+    animation: a-fade 0.5s ease-out both;
+  }
+  .a-box {
+    animation: a-box 0.45s ease-out both;
+  }
+  .a-pop {
+    animation: a-pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  }
+  .a-tag {
+    animation: a-tag 0.35s ease-out both;
+  }
+  .a-grow {
+    transform-origin: top;
+    animation: a-grow 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .a-growx {
+    transform-origin: left;
+    animation: a-growx 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .a-line {
+    animation: a-line 0.35s ease-out both;
+  }
+
+  /* Revelação ao rolar: só em navegadores com scroll-driven animations (Chrome, Edge). */
+  @supports (animation-timeline: view()) {
+    .v-bubble,
+    .v-json {
+      animation: a-up linear both;
+      animation-timeline: view();
+    }
+    .v-bubble {
+      animation-range: entry 10% cover 30%;
+    }
+    .v-json {
+      animation-range: entry 25% cover 45%;
+    }
+    .v-line {
+      transform-origin: top;
+      animation: a-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 38%;
+    }
+  }
+}
+
+@keyframes a-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes a-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes a-box {
+  from {
+    border-color: transparent;
+  }
+}
+
+@keyframes a-pop {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes a-tag {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes a-grow {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes a-growx {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes a-line {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}

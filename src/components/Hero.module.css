@@ -1,0 +1,179 @@
+.hero {
+  padding-top: clamp(32px, 7vw, 88px);
+  padding-bottom: clamp(64px, 9vw, 112px);
+}
+
+/* Botão Design / Código */
+.toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--text);
+  border-radius: 999px;
+}
+
+.toggle button {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toggle button[aria-pressed='true'] {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.toggle button[aria-pressed='false']:hover {
+  color: var(--select);
+}
+
+/* Vista de design: o nome como uma camada selecionada no Figma */
+.designView {
+  margin-top: 52px;
+}
+
+.selection {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  border: 1.5px solid var(--select);
+  padding: 6px 18px 2px 14px;
+}
+
+.layerTag {
+  position: absolute;
+  left: -1.5px;
+  top: -27px;
+  background: var(--select);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.handle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--select);
+}
+
+.handle0 {
+  top: -5px;
+  left: -5px;
+}
+
+.handle1 {
+  top: -5px;
+  right: -5px;
+}
+
+.handle2 {
+  bottom: -5px;
+  left: -5px;
+}
+
+.handle3 {
+  bottom: -5px;
+  right: -5px;
+}
+
+.name {
+  font-size: clamp(56px, 12.5vw, 172px);
+  line-height: 0.86;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  overflow-wrap: anywhere;
+  /* Espaço para as descendentes do "g" ficarem dentro da caixa de seleção */
+  padding-bottom: 0.1em;
+}
+
+.measure {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding-left: 28px;
+}
+
+.measureLine {
+  width: 9px;
+  height: 100%;
+  border-top: 1px solid var(--measure);
+  border-bottom: 1px solid var(--measure);
+  background: linear-gradient(var(--measure), var(--measure)) center / 1px 100% no-repeat;
+}
+
+.measureLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--bg);
+  background: var(--measure);
+  padding: 2px 6px;
+}
+
+/* Vista de código */
+.codeView {
+  margin-top: 24px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  border-radius: 6px;
+  padding: clamp(20px, 4vw, 44px);
+  overflow-x: auto;
+}
+
+.code {
+  font-size: clamp(14px, 2.3vw, 26px);
+  line-height: 1.65;
+}
+
+.codeLine {
+  display: block;
+  white-space: pre;
+}
+
+.tag {
+  color: var(--code-key);
+}
+
+.str {
+  color: var(--code-str);
+}
+
+/* Texto abaixo do nome */
+.role {
+  margin-top: 40px;
+  font-size: clamp(24px, 3.2vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.summary {
+  margin-top: 14px;
+  font-size: 19px;
+  line-height: 1.55;
+  max-width: 58ch;
+  color: var(--text-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 32px;
+}
+
+.resumePlaceholder {
+  font-size: 15px;
+}

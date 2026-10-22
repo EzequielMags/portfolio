@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 32px;
+  padding-block: 16px;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 12px 0;
+}
+
+.nav {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.navLink {
+  display: inline-block;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  background: linear-gradient(var(--select), var(--select)) left 85% / 0 1.5px no-repeat;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .navLink {
+    transition:
+      background-size 0.25s ease-out,
+      color 0.25s ease-out;
+  }
+}
+
+.navLink:hover {
+  background-size: 100% 1.5px;
+}

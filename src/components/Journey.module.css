@@ -1,0 +1,68 @@
+.timeline {
+  list-style: none;
+  margin-top: 48px;
+  padding: 0;
+  border-left: 2px solid var(--text);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 40px;
+  padding: 0 0 40px 28px;
+}
+
+.item:last-child {
+  padding-bottom: 4px;
+}
+
+.dot,
+.dotCurrent {
+  position: absolute;
+  left: -7px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot {
+  background: var(--bg);
+  border: 2px solid var(--text);
+}
+
+.dotCurrent {
+  background: var(--select);
+}
+
+.period {
+  flex: 0 0 180px;
+  font-size: 16px;
+}
+
+.body {
+  flex: 1 1 360px;
+  min-width: 0;
+}
+
+.titleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.place {
+  margin-top: 4px;
+}
+
+.description {
+  margin-top: 8px;
+  max-width: 60ch;
+}
