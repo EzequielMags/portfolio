@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import { allReposUrl, projects, type Project } from '../content/projects';
 import { MessageDemo } from './MessageDemo';
+import { PipelineDemo } from './PipelineDemo';
 import { StatusBadge } from './StatusBadge';
 import styles from './Projects.module.css';
+
+function ProjectVisual({ visual }: { visual: NonNullable<Project['visual']> }) {
+  return visual === 'pipeline' ? <PipelineDemo /> : <MessageDemo trigger="scroll" />;
+}
 
 function ProjectLinks({ project }: { project: Project }) {
   return (
@@ -25,9 +30,6 @@ function ProjectLinks({ project }: { project: Project }) {
 function FeaturedProject({ project }: { project: Project }) {
   return (
     <article className={styles.featured}>
-      <div className={styles.featuredVisual}>
-        <MessageDemo trigger="scroll" />
-      </div>
       <div className={styles.featuredBody}>
         <div className={styles.titleRow}>
           <h3 className={styles.featuredTitle}>{project.name}</h3>
@@ -52,6 +54,11 @@ function FeaturedProject({ project }: { project: Project }) {
         </dl>
         <ProjectLinks project={project} />
       </div>
+      {project.visual && (
+        <div className={styles.featuredVisual}>
+          <ProjectVisual visual={project.visual} />
+        </div>
+      )}
     </article>
   );
 }
@@ -65,6 +72,11 @@ function ProjectRow({ project }: { project: Project }) {
           {project.status && <StatusBadge label={project.status} />}
         </div>
         <p className={`muted ${styles.rowSummary}`}>{project.summary}</p>
+        {project.visual && (
+          <div className={styles.figure}>
+            <ProjectVisual visual={project.visual} />
+          </div>
+        )}
         {project.image && (
           <figure className={styles.figure}>
             <img

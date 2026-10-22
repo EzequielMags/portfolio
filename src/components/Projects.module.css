@@ -12,6 +12,13 @@
   min-width: 0;
 }
 
+/* No celular o texto vem antes do visual; em telas largas o visual fica à esquerda. */
+@media (min-width: 900px) {
+  .featuredVisual {
+    order: -1;
+  }
+}
+
 .featuredBody {
   flex: 1 1 320px;
   min-width: 0;

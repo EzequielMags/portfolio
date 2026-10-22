@@ -20,12 +20,26 @@ export interface Project {
   privateRepo?: boolean;
   caseStudyPath?: string;
   featured?: boolean;
+  // Visual feito em código no lugar de uma imagem.
+  visual?: 'pipeline' | 'message-demo';
 }
 
 export const projects: Project[] = [
   {
-    name: 'FinancerAI',
+    name: 'Ayni',
     featured: true,
+    visual: 'pipeline',
+    status: 'Em desenvolvimento',
+    summary:
+      'Startup: um CRM com IA para quem vende serviços de tecnologia, do primeiro contato ao contrato. Feito em parceria num monorepo, com entregas por fases e agentes de IA (Claude Code) trabalhando em paralelo.',
+    role: 'Núcleo da plataforma: contas, funil de vendas, agenda, notificações e cobrança',
+    stack: ['React', 'TypeScript', 'Supabase', 'monorepo com pnpm'],
+    team: '2 pessoas, startup',
+    privateRepo: true,
+  },
+  {
+    name: 'FinancerAI',
+    visual: 'message-demo',
     status: 'Em desenvolvimento',
     summary:
       'Controle financeiro por mensagem: a IA lê frases como “Gastei R$ 50 no Uber” e as transforma em receitas e despesas organizadas por categoria.',
@@ -36,12 +50,12 @@ export const projects: Project[] = [
     caseStudyPath: '/projetos/financerai',
   },
   {
-    name: 'Ayni',
+    name: 'StudyAI',
     status: 'Em desenvolvimento',
     summary:
-      'Startup: um CRM com IA para quem vende serviços de tecnologia, feito em parceria num monorepo, com entregas por fases e agentes de IA (Claude Code) trabalhando em paralelo. Cuido do núcleo da plataforma.',
-    stack: ['React', 'TypeScript', 'Supabase', 'monorepo com pnpm'],
-    privateRepo: true,
+      'Plataforma de estudos com IA: matérias, metas, cronogramas personalizados, resumos e exercícios gerados por IA.',
+    stack: ['React', 'Fastify', 'PostgreSQL', 'Prisma'],
+    repoUrl: 'https://github.com/EzequielMags/StudyAI',
   },
   {
     name: 'ImageCloud',
@@ -56,14 +70,6 @@ export const projects: Project[] = [
       width: 1200,
       height: 1002,
     },
-  },
-  {
-    name: 'StudyAI',
-    status: 'Em desenvolvimento',
-    summary:
-      'Plataforma de estudos com IA: matérias, metas, cronogramas personalizados, resumos e exercícios gerados por IA.',
-    stack: ['React', 'Fastify', 'PostgreSQL', 'Prisma'],
-    repoUrl: 'https://github.com/EzequielMags/StudyAI',
   },
   {
     name: 'Gerenciamento de Usuários',
