@@ -6,7 +6,7 @@ import { StatusBadge } from './StatusBadge';
 import styles from './Projects.module.css';
 
 function ProjectVisual({ visual }: { visual: NonNullable<Project['visual']> }) {
-  return visual === 'pipeline' ? <PipelineDemo /> : <MessageDemo trigger="scroll" />;
+  return visual === 'pipeline' ? <PipelineDemo /> : <MessageDemo />;
 }
 
 function ProjectLinks({ project }: { project: Project }) {

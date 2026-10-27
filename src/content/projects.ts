@@ -36,6 +36,7 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Supabase', 'monorepo com pnpm'],
     team: '2 pessoas, startup',
     privateRepo: true,
+    caseStudyPath: '/projetos/ayni',
   },
   {
     name: 'FinancerAI',

@@ -16,8 +16,9 @@
 
 .stage {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 6px 12px;
   min-height: 48px;
   padding: 10px 14px;
   border: 1px solid var(--line);
@@ -25,16 +26,51 @@
   background: var(--bg);
   font-size: 16px;
   font-weight: 500;
+  transition:
+    border-color 0.3s ease-out,
+    background-color 0.3s ease-out,
+    box-shadow 0.3s ease-out;
 }
 
 .index {
   font-family: var(--font-mono);
   font-size: 13px;
   color: var(--text-2);
+  transition: color 0.3s ease-out;
 }
 
 .label {
   flex: 1;
+}
+
+/* Etapas que o lead já passou */
+.passed {
+  border-color: rgb(127 155 255 / 0.35);
+}
+
+.passed .index {
+  color: var(--select);
+}
+
+/* Onde o lead está agora */
+.current {
+  border-color: var(--select);
+  background: rgb(127 155 255 / 0.12);
+  box-shadow: 0 0 0 1px var(--select);
+}
+
+.current .index {
+  color: var(--select);
+}
+
+/* Lead fechado */
+.done {
+  border-color: var(--select);
+  background: rgb(127 155 255 / 0.18);
+}
+
+.done .index {
+  color: var(--select);
 }
 
 .aiTag {
@@ -46,17 +82,67 @@
   color: var(--bg);
 }
 
-.done {
-  border-color: var(--select);
+.humanTag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border: 1px solid var(--measure);
+  color: var(--measure);
+  white-space: nowrap;
 }
 
-.done .index {
-  color: var(--select);
+@media (prefers-reduced-motion: no-preference) {
+  .pulse {
+    animation: pulse 0.6s ease-in-out 2;
+  }
+
+  .humanTag {
+    animation: fadeIn 0.3s ease-out both;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.18);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.footer {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 24px;
 }
 
 .caption {
-  margin-top: 20px;
   font-size: 14px;
   line-height: 1.5;
   max-width: 60ch;
+}
+
+.replay {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.replay:hover {
+  border-color: var(--select);
+  color: var(--select);
 }

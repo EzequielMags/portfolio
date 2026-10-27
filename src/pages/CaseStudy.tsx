@@ -1,24 +1,54 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Copy } from '../components/Copy';
 import { Header } from '../components/Header';
 import { MessageDemo } from '../components/MessageDemo';
+import { PipelineDemo } from '../components/PipelineDemo';
 import { StatusBadge } from '../components/StatusBadge';
-import { financerAiCase as project } from '../content/financerai';
+import { findCaseStudy, type CaseStudySection } from '../content/caseStudies';
 import { fullName } from '../content/profile';
+import { NotFound } from './NotFound';
 import styles from './CaseStudy.module.css';
 
+function SectionBody({ section }: { section: CaseStudySection }) {
+  return (
+    <div className={styles.blockText}>
+      {section.paragraphs?.map((text) => <Copy key={text} text={text} className={styles.paragraph} />)}
+      {section.list && (
+        <ul className={styles.list}>
+          {section.list.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
+      {section.steps && (
+        <ol className={styles.steps}>
+          {section.steps.map((step) => (
+            <li key={step}>{step}</li>
+          ))}
+        </ol>
+      )}
+    </div>
+  );
+}
+
 export function CaseStudy() {
+  const { slug } = useParams();
+  const project = findCaseStudy(slug);
+
   useEffect(() => {
+    if (!project) return;
     document.title = `${project.name}, estudo de caso | ${fullName}`;
     window.scrollTo(0, 0);
-  }, []);
+  }, [project]);
+
+  if (!project) return <NotFound />;
 
   return (
     <>
       <Header variant="page" />
       <main id="conteudo" className={`container ${styles.page}`}>
-        <StatusBadge label={project.status} className="a-fade" />
+        {project.status && <StatusBadge label={project.status} className="a-fade" />}
         <h1 className={`${styles.title} a-up`} style={{ animationDelay: '100ms' }}>
           {project.name}
         </h1>
@@ -35,61 +65,30 @@ export function CaseStudy() {
           ))}
           <div>
             <dt>Código</dt>
-            <dd>
-              <a href={project.repoUrl}>GitHub</a>
-            </dd>
+            <dd>{project.repoUrl ? <a href={project.repoUrl}>GitHub</a> : 'Repositório privado'}</dd>
           </div>
         </dl>
 
         <div className={styles.demo}>
-          <MessageDemo trigger="load" layout="row" />
+          {project.visual === 'pipeline' ? <PipelineDemo /> : <MessageDemo layout="row" />}
         </div>
 
-        <section className={styles.block} aria-labelledby="problema">
-          <h2 id="problema" className={styles.blockTitle}>
-            O problema
-          </h2>
-          <p className={styles.blockText}>{project.problem}</p>
-        </section>
-
-        <section className={styles.block} aria-labelledby="como-funciona">
-          <h2 id="como-funciona" className={styles.blockTitle}>
-            Como funciona
-          </h2>
-          <ol className={`${styles.blockText} ${styles.steps}`}>
-            {project.steps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-        </section>
-
-        <section className={styles.block} aria-labelledby="minha-parte">
-          <h2 id="minha-parte" className={styles.blockTitle}>
-            Minha parte
-          </h2>
-          <p className={styles.blockText}>{project.myPart}</p>
-        </section>
-
-        <section className={styles.block} aria-labelledby="onde-esta">
-          <h2 id="onde-esta" className={styles.blockTitle}>
-            Onde está hoje
-          </h2>
-          <div className={styles.blockText}>
-            <p>{project.statusText}</p>
-            <Copy text={project.statusDetail} className={styles.note} />
-          </div>
-        </section>
-
-        <section className={styles.block} aria-labelledby="aprendi">
-          <h2 id="aprendi" className={styles.blockTitle}>
-            O que aprendi
-          </h2>
-          <Copy text={project.learnings} className={styles.blockText} />
-        </section>
+        {project.sections.map((section) => (
+          <section key={section.id} className={styles.block} aria-labelledby={section.id}>
+            <h2 id={section.id} className={styles.blockTitle}>
+              {section.title}
+            </h2>
+            <SectionBody section={section} />
+          </section>
+        ))}
 
         <nav aria-label="Outros projetos" className={styles.next}>
           <Link to="/#projetos">Todos os projetos</Link>
-          <a href={project.next.href}>{project.next.label}</a>
+          {project.next.internal ? (
+            <Link to={project.next.href}>{project.next.label}</Link>
+          ) : (
+            <a href={project.next.href}>{project.next.label}</a>
+          )}
         </nav>
       </main>
     </>

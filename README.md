@@ -21,7 +21,7 @@ Todo o texto fica em `src/content/`, sem precisar mexer nos componentes:
 | `projects.ts` | projetos (o `featured: true` vira o destaque) |
 | `skills.ts` | competências e soft skills |
 | `journey.ts` | trajetória, do mais recente ao mais antigo |
-| `financerai.ts` | estudo de caso do FinancerAI |
+| `caseStudies.ts` | estudos de caso (Ayni e FinancerAI), servidos em `/projetos/<slug>` |
 
 Textos entre colchetes, como `[Soft skills...]`, são placeholders: aparecem em rosa no site até serem trocados.
 

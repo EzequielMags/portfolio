@@ -24,38 +24,8 @@
     transform-origin: top;
     animation: a-grow 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
-  .a-growx {
-    transform-origin: left;
-    animation: a-growx 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  }
   .a-line {
     animation: a-line 0.35s ease-out both;
-  }
-
-  /* Revelação ao rolar: só em navegadores com scroll-driven animations (Chrome, Edge). */
-  @supports (animation-timeline: view()) {
-    .v-bubble,
-    .v-json {
-      animation: a-up linear both;
-      animation-timeline: view();
-    }
-    .v-bubble {
-      animation-range: entry 10% cover 30%;
-    }
-    .v-json {
-      animation-range: entry 25% cover 45%;
-    }
-    .v-line {
-      transform-origin: top;
-      animation: a-grow linear both;
-      animation-timeline: view();
-      animation-range: entry 20% cover 38%;
-    }
-    /* Etapas do funil da Ayni: cada uma recebe o próprio animation-range no componente. */
-    .v-step {
-      animation: a-line linear both;
-      animation-timeline: view();
-    }
   }
 }
 
@@ -94,12 +64,6 @@
 @keyframes a-grow {
   from {
     transform: scaleY(0);
-  }
-}
-
-@keyframes a-growx {
-  from {
-    transform: scaleX(0);
   }
 }
 

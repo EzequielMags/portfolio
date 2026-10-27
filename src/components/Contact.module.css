@@ -8,24 +8,112 @@
   max-width: 52ch;
 }
 
-.links {
+.cards {
   list-style: none;
   margin-top: 40px;
   padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+/* Quatro canais: em telas largas, uma grade 2x2 */
+@media (min-width: 720px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  min-height: 84px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  transition:
+    border-color 0.2s ease-out,
+    background-color 0.2s ease-out;
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--select);
+  background: rgb(127 155 255 / 0.06);
+}
+
+.icon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  color: var(--select);
+}
+
+/* Base larga o bastante para o e-mail; sem espaço, o botão de copiar desce de linha */
+.cardText {
+  flex: 1 1 230px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: clamp(20px, 3vw, 32px);
-  font-weight: 600;
+  gap: 2px;
 }
 
-.links a {
-  display: inline-block;
-  padding: 8px 0;
+.cardLink {
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
 }
 
-.email {
+/* O link cobre o cartão inteiro */
+.cardLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+}
+
+.cardLink:focus-visible {
+  outline: none;
+}
+
+.card:has(.cardLink:focus-visible) {
+  outline: 2px solid var(--select);
+  outline-offset: 3px;
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-2);
   overflow-wrap: anywhere;
+}
+
+/* Fica acima do link do cartão para receber o clique */
+.copy {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  margin-left: auto;
+  min-height: 36px;
+  min-width: 84px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.copy:hover {
+  border-color: var(--select);
+  color: var(--select);
 }
 
 .footer {
